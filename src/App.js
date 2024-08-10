@@ -1,23 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+
+// import Home1 from "./home/Home1";
+import Register from "./register/Register";
+// import Login from "./login/Login";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <>
+        {/* <Home1 title='CarrierRise' topic='@Consultant List'/> */}
+        {/* <Login/> */}
+        <Register/>
+      </>
     </div>
   );
 }
