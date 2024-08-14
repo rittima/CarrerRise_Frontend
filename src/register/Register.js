@@ -1,4 +1,5 @@
 import React, { useState }  from 'react'
+import "./register.css"
 
 export default function Register(props) { 
   
@@ -15,8 +16,6 @@ export default function Register(props) {
       type:type
     })
   };
-
-
 
   const validateForm = () => {
     const newErrors = {};
@@ -63,10 +62,10 @@ export default function Register(props) {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Form is valid, proceed with submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      // Form is valid, proceed with submission
       console.log('Form submitted successfully!');
       showAlert("You are Successfully registered !","success");
     } else {
@@ -81,7 +80,7 @@ export default function Register(props) {
         <div
           className={`alert alert-${alert.type} alert-dismissible fade show`}
           role="alert">
-          <strong>{alert.type === 'success' ? 'Success' : 'Error'}</strong>: {alert.message}
+          <strong>{alert.type === 'success' ? 'Success' : 'Error'}</strong>: {alert.message} 
           <button
             type="button"
             className="btn-close"
@@ -91,12 +90,12 @@ export default function Register(props) {
         </div>
       )}
 
-      <div className="container" style={{ padding: "5%" }}>
+      <div className="container" style={{ padding: "5%", paddingLeft: '25%'}} >
         <h1>
           <b>{props.title}</b>
         </h1>
         <form onSubmit={handleSubmit} >
-          <div className="form-floating mb-3">
+          <div className="form-floating mb-3" id='field'>
             <input
               type="email"
               className={`form-control ${errors.email ? "is-invalid" : ""}`}
@@ -110,7 +109,7 @@ export default function Register(props) {
               <div className="invalid-feedback">{errors.email}</div>
             )}
           </div>
-          <div className="form-floating mb-3">
+          <div className="form-floating mb-3" id='field'>
             <input
               type="password"
               className={`form-control ${errors.password ? "is-invalid" : ""}`}
@@ -124,7 +123,7 @@ export default function Register(props) {
               <div className="invalid-feedback">{errors.password}</div>
             )}
           </div>
-          <div className="form-floating mb-3">
+          <div className="form-floating mb-3" id='field'>
             <input
               type="password"
               className={`form-control ${
@@ -140,7 +139,7 @@ export default function Register(props) {
               <div className="invalid-feedback">{errors.confirmPassword}</div>
             )}
           </div>
-          <div className="form-floating mb-3">
+          <div className="form-floating mb-3" id='field'>
             <select
               className={`form-select ${errors.role ? "is-invalid" : ""}`}
               id="floatingSelect"

@@ -50,8 +50,14 @@
     color: white; 
     padding: 6px 8px 6px 16px;
 }
-.hr{
+#hr{
     border: 1px solid whitesmoke;
     margin-left: 12px;
     margin-right: 10px;
+}
+#list{
+    background-color : #111;
+    color: white;
+    border: none;
+    /* border-bottom: 0.5px solid wheat; */
 }

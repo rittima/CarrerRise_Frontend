@@ -85,7 +85,7 @@ export default function Login(props) {
         </div>
       )}
     
-      <div className="container" style={{ padding: '5%' }}>
+      <div className="container" style={{ padding: "5%", paddingLeft: '25%' }}>
         <h1><b>{props.title}</b></h1>
         <form onSubmit={handleSubmit}>
 
