@@ -1,9 +1,9 @@
 
-import Home1 from "./home/Home1";
-import Home2 from "./home/Home2";
+import Home1 from "./rittima/home/Home1";
+import Home2 from "./rittima/home/Home2";
 
-// import Register from "./register/Register";
-// import Login from "./login/Login";
+// import Register from "../rittima/register/Register";
+// import Login from "../rittima/login/Login";
 
 function App() {
   
