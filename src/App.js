@@ -13,7 +13,6 @@ function App() {
       <>
         <Home1 title='CareeRise' />
         <Home2 topic='@Consultant List'/>
-
         {/* <Login title='LOGIN'/>
         <Register title='REGISTER' /> */}
         
