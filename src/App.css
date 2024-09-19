@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box; /* Ensure padding and border are included in element's total width and height */
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.contain {
+  display: flex;
+  min-height: 100vh; /* Ensure the container takes at least the full viewport height */
+}
+
+.sidebar {
+  background-color: #151515;
+  color: white;
+  width: 200px;
+  position: sticky;
+  top: 0; /* Stick to the top */
+  height: 100vh; /* Full height of viewport */
+  overflow-y: auto; /* Add scroll to sidebar if content overflows */
+}
+
+.top_section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 15px;
+}
+
+.logo {
+  font-size: 20px; /* Adjusted font size */
+}
+
+.bars {
+  display: flex;
+  font-size: 25px;
+}
+
+.link {
+  display: flex;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  gap: 15px;
+  transition: all 0.3s;
+}
+
+.link:hover {
+  background-color: lightskyblue;
+  color: #151515;
+}
+
+.active {
+  background-color: lightskyblue;
+  color: #151515;
+}
+
+.icon, .link_text {
+  font-size: 15px;
+}
+
+.icons {
+  cursor: pointer;
+}
+
+.main {
+  flex: 1; /* Make the main content take up the remaining space */
+  padding: 10px;
+  overflow-y: auto; /* Add vertical scroll if content overflows */
+}
