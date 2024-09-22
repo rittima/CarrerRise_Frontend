@@ -1,6 +1,5 @@
 import React from 'react'
 import Slide from './Slide';
-import SideNavbar from '../../components/SideNavbar';
 
 const Dashboard = () => {
   const name = localStorage.getItem('username');
