@@ -7,6 +7,7 @@ const ConsultantState = (props) => {
 
     //GET Consultant
     const getConsultant = async() =>{
+      try{
       const response = await fetch(`http://localhost:5000/api/consultant/getConsultant`, {
         method: "GET",
         headers: {
@@ -14,9 +15,15 @@ const ConsultantState = (props) => {
           "auth-token":localStorage.getItem('token')
         },
       });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const json = await response.json();
       setConsultant(json);
-    }
+      }catch (error) {
+        console.error("Failed to fetch consultants:", error);
+      }
+    };
 
     //ADD Consultant
     const addConsultant = async (name,email,company,role) =>{
@@ -48,6 +55,7 @@ const ConsultantState = (props) => {
           },
         }
       );
+
       const json = await response.json();
       console.log(json);
       const newCons = consultants.filter((consultant) => { return consultant._id !== id })
@@ -55,66 +63,47 @@ const ConsultantState = (props) => {
     }
 
     //Edit note
-  const updateConsultant = async (id,name,email,company,role) => {
-    if (!id) {
-      console.error("Error: Consultant ID is undefined.");
-      return;
-    }
-  
-    //api call
-    try
-    {      
-      const response = await fetch(
-      `http://localhost:5000/api/consultant/updateconsultants/${id}`,
-      {
-        
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "auth-token":localStorage.getItem('token')
-          // "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjY2ZWQzYjc1NTZjYTIxOGNiNjllZWZlMiJ9LCJpYXQiOjE3MjY4MjM1NDl9.KaSgcaRd8zRG0D8sYYB6HyPJpsQRE9mVkrxg5BxOl50"
-        },
-        body: JSON.stringify({name, email,company,role }),
+    const updateConsultant = async (id,name,email,company,role) => {
+      
+      if (!id) {
+        console.error("Consultant ID is undefined");
+        return; 
       }
-    );
-
-    if (!response.ok) {
-      const text = await response.text(); // Get the response as text
-      try {
-        const errorMessage = JSON.parse(text); // Try to parse it as JSON
-        throw new Error(errorMessage.error || "Something went wrong!");
-      } catch (err) {
-        throw new Error("Server error: " + text); // If it fails, throw the raw text
+      //api call   
+        const response = await fetch(
+        `http://localhost:5000/api/consultant/updateconsultants/${id}`,
+        {
+          
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token":localStorage.getItem('token')
+          },
+          body: JSON.stringify({name, email,company,role }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-    }
 
-    const updatedConsultant = await response.json();
-    setConsultant(prevCons =>
-      prevCons.map(cons => (cons._id === id ? updatedConsultant : cons))
-    );
+    //   const json= await response.json();
+    //   console.log(json);
 
-    let newCons=JSON.parse( JSON.stringify(consultants))
-    //logic to edit
-    for (let index = 0; index < newCons.length; index++) {
-      const element = newCons[index];
-      if (element._id === id) {
-        newCons[index].name = name;
-        newCons[index].email = email;
-        newCons[index].company = company;
-        newCons[index].role = role; 
-        break;
+      let newConsultant=JSON.parse( JSON.stringify(consultants))
+      //logic to edit
+      for (let index = 0; index < newConsultant.length; index++) {
+        const element = consultants[index];
+        if (element._id === id) {
+          newConsultant[index].name = name;
+          newConsultant[index].email = email;
+          newConsultant[index].company = company;
+          newConsultant[index].role = role; 
+          break;
+        }
       }
+      setConsultant(newConsultant)
+      
     }
-    setConsultant(newCons)
-    console.log("Consultant updated successfully: "+updatedConsultant);
-    
-  }
-  catch (error) {
-    // Catch and handle any errors
-    console.error("Error updating consultant:", error.message);
-    // showAlert("Failed to update consultant: " + error.message, "danger"); // Example: show an alert
-  }
-  };
 
 
 

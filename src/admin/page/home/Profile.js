@@ -18,18 +18,21 @@ const Profile = () => {
     else{     
       getConsultant();
     }    
-  },[getConsultant])
+  },[getConsultant,navigate])
 
   const editConsultant = (currentConsultant)=>{
     ref.current.click()
-    setConsultant({id:currentConsultant._id, Ename : currentConsultant.name, Eemail:currentConsultant.email , Ecompany:currentConsultant.company, Erole:currentConsultant.role})
+    setConsultant({id : currentConsultant._id, Ename : currentConsultant.name, Eemail:currentConsultant.email , Ecompany:currentConsultant.company, Erole:currentConsultant.role})
   }
 
   const handleClick=(e)=>{
+    console.log("updating the data",consultant);
+    console.log("updating the id :",consultant.id);
     refClose.current.click();
-    updateConsultant(consultant._id,consultant.Ename, consultant.Eemail, consultant.Ecompany, consultant.Erole);
+    updateConsultant(consultant.id,consultant.Ename, consultant.Eemail, consultant.Ecompany, consultant.Erole);
     navigate("/")
   }
+
   const onChange=(e)=>{
     setConsultant({...consultant,[e.target.name]:e.target.value})
   }

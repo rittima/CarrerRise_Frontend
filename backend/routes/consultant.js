@@ -85,15 +85,38 @@ router.get('/getConsultant', fetchadmin, async (req, res) => {
         }
     });
 
+    // router.put("/updateconsultants/:id",fetchadmin,
+    // async (req, res) => {
+    //     const { id } = req.params;
+    //     const { name, email, company, role } = req.body;
+
+    //     try {
+    //         // Validate input
+    //         if (!name || !email || !company || !role) {
+    //         return res.status(400).json({ message: "All fields are required." });
+    //         }
+
+    //         // Update logic, e.g., using Mongoose
+    //         const updatedConsultant = await Consultant.findByIdAndUpdate(id, { name, email, company, role }, { new: true });
+            
+    //         if (!updatedConsultant) {
+    //         return res.status(404).json({ message: "Consultant not found." });
+    //         }
+
+    //         res.json(updatedConsultant);
+    //     } catch (error) {
+    //         console.error("Error updating consultant:", error);
+    //         res.status(500).json({ message: "Internal server error", error: error.message });
+    //     }
+    // })
+
+
+
 
   //ROUTER 3 : Update consultants details : PUT. login required
 router.put("/updateconsultants/:id",fetchadmin,
     async (req, res) => {
         const {id} = req.params;
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ error: "Invalid consultant ID" });
-        }
-
         const {name,email,role,company}=req.body;
         try {
             //create new consultants
@@ -102,6 +125,11 @@ router.put("/updateconsultants/:id",fetchadmin,
             if (email) { newConsultant.email = email; };
             if (role) { newConsultant.role = role; };
             if (company) { newConsultant.company = company; };
+
+            // Validate input
+            if (!name || !email || !company || !role) {
+            return res.status(400).json({ message: "All fields are required." });
+            }
 
             //find the consultant to be updated & update it
             let consultant = await Consultant.findById(id);
@@ -115,7 +143,7 @@ router.put("/updateconsultants/:id",fetchadmin,
             res.json({consultant});
         } catch (error) {
             console.error("Error updating consultant:",error.message);
-            res.status(500).send("Internal error !")    
+            res.status(500).j({ message: "Internal server error", error: error.message })    
         }        
     })
     
