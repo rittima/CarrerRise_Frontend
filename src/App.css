@@ -25,12 +25,12 @@ body {
   overflow-y: auto; /* Add scroll to sidebar if content overflows */
 }
 
-.top_section {
+/* .top_section {
   display: flex;
   align-items: center;
   gap: 15px;
   padding: 20px 15px;
-}
+} */
 
 .logo {
   font-size: 20px; /* Adjusted font size */
@@ -68,8 +68,40 @@ body {
   cursor: pointer;
 }
 
-.main {
-  flex: 1; /* Make the main content take up the remaining space */
+/* .main {
+  flex: 1; 
   padding: 10px;
-  overflow-y: auto; /* Add vertical scroll if content overflows */
+  overflow-y: auto; 
+} */
+.no-outline-btn {
+  border: none;
+  outline: none;
+  background-color: transparent; /* Optional: if you want no background */
+  padding: 5; /* Optional: to remove padding if needed */
+  color: #fff;
+  transition: color 0.3s ease;
 }
+.nav-btton:hover {
+  border: none;
+  outline: none;
+  color: #05b8ff; /* Change this to your desired hover color */
+}
+
+.Sline{
+  color: #cfcfcf;
+  font-size: 20px;
+  font-weight: bolder;
+  padding-top: 1%;
+  
+}
+
+/* .auth-background {
+  background-image: url('./admin/image/background.jpg');
+  background-size: cover;     
+  background-position: center; 
+  height: 100vh;              
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;             
+} */

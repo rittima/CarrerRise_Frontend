@@ -52,7 +52,7 @@ router.post("/register",
       });
       const data = {
         admin:{
-            id:admin.id
+            id:admin._id
         }
       }
       const authtoken = jwt.sign(data,JWT_SECRET);
@@ -105,7 +105,7 @@ router.post("/login",
 
       const data={
           admin:{
-              id: admin.id,
+              id: admin._id,
           }
       }
 

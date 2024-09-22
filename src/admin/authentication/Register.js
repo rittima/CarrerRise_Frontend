@@ -29,7 +29,7 @@ export default function Register(props) {
         showAlert("Successfully Registered !","success");
         localStorage.setItem('token',json.authtoken);
         localStorage.setItem('username',name);
-        navigate("/consultant-add", { state: { showModal: true } });
+        navigate("/login");
       }
       else{
         showAlert("Invalid Credential","danger");
@@ -46,7 +46,7 @@ export default function Register(props) {
         <div className='col-md-6'>
           <div className='card'>
             <div className='card-body'>
-              <h1 className='card-title text-center mb-4'>Register</h1>
+              <h1 className='card-title text-center mb-4'>Register</h1><hr />
               <form onSubmit={handleClick}>
                 <div className='mb-3'>
                   <label htmlFor="name" className="form-label">Full Name</label>
@@ -123,7 +123,7 @@ export default function Register(props) {
                 </div>
 
                 <div className='d-grid'>
-                  <button type="submit" className="btn btn-primary">Sign Up</button>
+                  <button type="submit" className="btn btn-primary" >Sign Up</button>
                 </div>
               </form>
             </div>
@@ -133,3 +133,4 @@ export default function Register(props) {
     </div>
   );
 }
+

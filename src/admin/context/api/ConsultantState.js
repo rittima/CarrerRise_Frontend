@@ -56,23 +56,43 @@ const ConsultantState = (props) => {
 
     //Edit note
   const updateConsultant = async (id,name,email,company,role) => {
-    console.log("update");
+    if (!id) {
+      console.error("Error: Consultant ID is undefined.");
+      return;
+    }
+  
     //api call
-    const response = await fetch(
+    try
+    {      
+      const response = await fetch(
       `http://localhost:5000/api/consultant/updateconsultants/${id}`,
       {
+        
         method: "PUT",
-        body: JSON.stringify({name, email,company,role }),
         headers: {
           "Content-Type": "application/json",
           "auth-token":localStorage.getItem('token')
+          // "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbiI6eyJpZCI6IjY2ZWQzYjc1NTZjYTIxOGNiNjllZWZlMiJ9LCJpYXQiOjE3MjY4MjM1NDl9.KaSgcaRd8zRG0D8sYYB6HyPJpsQRE9mVkrxg5BxOl50"
         },
+        body: JSON.stringify({name, email,company,role }),
       }
     );
 
-    const json = await response.json();
-    console.log(json);
-    
+    if (!response.ok) {
+      const text = await response.text(); // Get the response as text
+      try {
+        const errorMessage = JSON.parse(text); // Try to parse it as JSON
+        throw new Error(errorMessage.error || "Something went wrong!");
+      } catch (err) {
+        throw new Error("Server error: " + text); // If it fails, throw the raw text
+      }
+    }
+
+    const updatedConsultant = await response.json();
+    setConsultant(prevCons =>
+      prevCons.map(cons => (cons._id === id ? updatedConsultant : cons))
+    );
+
     let newCons=JSON.parse( JSON.stringify(consultants))
     //logic to edit
     for (let index = 0; index < newCons.length; index++) {
@@ -81,12 +101,22 @@ const ConsultantState = (props) => {
         newCons[index].name = name;
         newCons[index].email = email;
         newCons[index].company = company;
-        newCons[index].role = role;
+        newCons[index].role = role; 
         break;
       }
     }
     setConsultant(newCons)
+    console.log("Consultant updated successfully: "+updatedConsultant);
+    
+  }
+  catch (error) {
+    // Catch and handle any errors
+    console.error("Error updating consultant:", error.message);
+    // showAlert("Failed to update consultant: " + error.message, "danger"); // Example: show an alert
+  }
   };
+
+
 
   return (
     <div>

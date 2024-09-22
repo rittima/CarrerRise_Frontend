@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BsMenuButton } from 'react-icons/bs'
+import { BsDatabaseAdd, BsMenuButton } from 'react-icons/bs'
 import { FaHome, FaTh } from 'react-icons/fa'
 import { IoPersonCircle } from 'react-icons/io5'
 import { RiUserAddLine } from 'react-icons/ri'
@@ -25,6 +25,11 @@ const SideNavbar = ({children}) => {
       path:"/",
       name:"Your Profile",
       icon:<IoPersonCircle />
+    },
+    {
+      path:"/consultant-add",
+      name:"Add you data",
+      icon:<BsDatabaseAdd />
     },
     {
       path:"/dashboard",
@@ -74,3 +79,4 @@ const SideNavbar = ({children}) => {
 }
 
 export default SideNavbar
+
